@@ -1,42 +1,36 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-md-12 text-center">
-      <h1>Welcome to the Dashboard, <%= user.username %></h1>
-      <p>You are logged in as <%= user.role.name %></p>
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- head -->
+<%- include('../components/dashboard/head'); %>
+
+
+<body class="g-sidenav-show  bg-gray-100">
+
+  <!-- aside nav -->
+  <%- include('../components/dashboard/asside'); %>
+
+
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+
+    <!-- Nav -->
+    <%- include('../components/dashboard/nav'); %>
+
+
+    <div class="container-fluid py-4">
+      <!-- body -->
+      <%- body %>
+
+
+      <!-- footer -->
+      <%- include('../components/dashboard/footer'); %>
+
     </div>
-  </div>
-  <div class="row mt-4">
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body text-center">
-          <h5 class="card-title">Profile</h5>
-          <p class="card-text">View and update your profile.</p>
-          <a href="/profile" class="btn btn-primary">Go to Profile</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body text-center">
-          <h5 class="card-title">Employees</h5>
-          <p class="card-text">Manage employees and their details.</p>
-          <a href="/employees" class="btn btn-primary">Manage Employees</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body text-center">
-          <h5 class="card-title">Settings</h5>
-          <p class="card-text">Configure application settings.</p>
-          <a href="/settings" class="btn btn-primary">Go to Settings</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row mt-4">
-    <div class="col-md-12 text-center">
-      <a href="/logout" class="btn btn-danger">Logout</a>
-    </div>
-  </div>
-</div>
+  </main>
+  <!-- plugins -->
+
+  <!-- scripts -->
+  <%- include('../components/dashboard/scripts'); %>
+</body>
+
+</html>

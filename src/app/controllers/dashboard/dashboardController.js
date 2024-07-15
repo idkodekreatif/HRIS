@@ -10,7 +10,8 @@ exports.index = async (req, res) => {
 
     const employee = user.employee;
 
-    res.render("layouts/app", {
+    res.render("dashboard/dashboard", {
+      title: "Dashboard",
       user,
       employee,
     });
