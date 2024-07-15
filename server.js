@@ -1,10 +1,12 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const ejs = require("ejs");
 const path = require("path");
 const expressLayouts = require("express-ejs-layouts");
 const connectToDatabase = require("./src/configs/connectToDatabase");
-const authRoutes = require("./src/routes/Routes");
+const authRoutes = require("./src/app/routes/Routes");
+require("dotenv").config();
 
 const app = express();
 
@@ -27,7 +29,9 @@ app.use(
 connectToDatabase();
 
 // Parse request bodies
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Routes
 app.use(authRoutes);
