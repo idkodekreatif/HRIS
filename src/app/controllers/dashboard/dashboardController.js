@@ -20,7 +20,7 @@ exports.index = async (req, res) => {
       employee: user.employee,
       summary: {
         employeeCount,
-        departmentCount: departmentCount.length, // Use length to get count
+        departmentCount: departmentCount.length,
         attendanceCount,
         leaveCount,
         payrollCount,
