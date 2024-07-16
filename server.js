@@ -8,7 +8,7 @@ const expressLayouts = require("express-ejs-layouts");
 const connectToDatabase = require("./src/configs/connectToDatabase");
 const authRoutes = require("./src/app/routes/Routes");
 const greetingMiddleware = require("./src/app/middlewares/greetingMiddleware");
-// const MongoStore = require("connect-mongo");
+const MongoStore = require("connect-mongo");
 
 const app = express();
 
@@ -31,17 +31,17 @@ app.use(
 connectToDatabase();
 
 // Middleware for session
-// app.use(
-//   session({
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: false,
-//     store: MongoStore.create({
-//       mongoUrl: process.env.MONGO_URI,
-//       collectionName: "sessions",
-//     }),
-//   })
-// );
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI,
+      collectionName: "sessions",
+    }),
+  })
+);
 
 // Global middleware for greeting
 app.use(greetingMiddleware);
