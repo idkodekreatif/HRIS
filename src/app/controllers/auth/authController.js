@@ -4,14 +4,14 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("../../../configs/config");
 
-exports.login = async (req, res) => {
-  if (req.method === "GET") {
-    return res.render("auth/signin", {
-      title: "Login",
-      layout: "./layouts/auth",
-    });
-  }
+exports.index = async (req, res) => {
+  res.render("auth/signin", {
+    title: "Login",
+    layout: "./layouts/auth",
+  });
+};
 
+exports.login = async (req, res) => {
   const { username, password, rememberMe } = req.body;
 
   try {
