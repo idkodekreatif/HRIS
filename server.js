@@ -8,6 +8,7 @@ const connectToDatabase = require("./src/configs/connectToDatabase");
 const authRoutes = require("./src/app/routes/Routes");
 const greetingMiddleware = require("./src/app/middlewares/greetingMiddleware");
 const sessionMiddleware = require("./src/configs/sessionConfig");
+const setCurrentRoute = require("./src/app/middlewares/setCurrentRoute");
 
 const app = express();
 
@@ -29,11 +30,10 @@ app.use(
 // Connect to MongoDB
 connectToDatabase();
 
-// Middleware for session
+// Global middleware
 app.use(sessionMiddleware);
-
-// Global middleware for greeting
 app.use(greetingMiddleware);
+app.use(setCurrentRoute);
 
 // Parse request bodies
 app.use(express.json());
