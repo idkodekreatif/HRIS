@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-const session = require("express-session");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const path = require("path");
@@ -8,7 +7,8 @@ const expressLayouts = require("express-ejs-layouts");
 const connectToDatabase = require("./src/configs/connectToDatabase");
 const authRoutes = require("./src/app/routes/Routes");
 const greetingMiddleware = require("./src/app/middlewares/greetingMiddleware");
-// const MongoStore = require("connect-mongo");
+const sessionMiddleware = require("./src/configs/sessionConfig");
+const setCurrentRoute = require("./src/app/middlewares/setCurrentRoute");
 
 const app = express();
 
@@ -30,21 +30,10 @@ app.use(
 // Connect to MongoDB
 connectToDatabase();
 
-// Middleware for session
-// app.use(
-//   session({
-//     secret: process.env.SESSION_SECRET,
-//     resave: false,
-//     saveUninitialized: false,
-//     store: MongoStore.create({
-//       mongoUrl: process.env.MONGO_URI,
-//       collectionName: "sessions",
-//     }),
-//   })
-// );
-
-// Global middleware for greeting
+// Global middleware
+app.use(sessionMiddleware);
 app.use(greetingMiddleware);
+app.use(setCurrentRoute);
 
 // Parse request bodies
 app.use(express.json());

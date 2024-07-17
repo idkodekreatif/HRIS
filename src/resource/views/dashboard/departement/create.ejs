@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-lg-9 col-12 mx-auto">
+    <div class="card card-body mt-4">
+      <h6 class="mb-0">New Departemen</h6>
+      <p class="text-sm mb-0">Create new departemen</p>
+      <hr class="horizontal dark my-3">
+      <form action="/departments/add" method="POST">
+        <label for="departemenName" class="form-label">Departemen Name</label>
+        <input type="text" name="name" class="form-control" id="departemenName" placeholder="Name">
+
+        <label class="mt-4 form-label">Manager</label>
+        <select name="manager" class="form-control" required>
+          <% employees.forEach(employee => { %>
+          <option value="<%= employee._id %>"><%= employee.name %></option>
+          <% }) %>
+        </select>
+
+        <div class="d-flex justify-content-end mt-4">
+          <button type="button" name="button" class="btn btn-light m-0">Cancel</button>
+          <button type="submit" name="button" class="btn bg-gradient-primary m-0 ms-2">Create Departemen</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
