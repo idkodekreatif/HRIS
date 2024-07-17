@@ -62,9 +62,9 @@
                   <td class="text-sm"><%= department.manager.name %></td>
 
                   <td class="text-sm">
-                    <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
+                    <!-- <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
                       <i class="fas fa-eye text-secondary"></i>
-                    </a>
+                    </a> -->
                     <a href="/departments/edit/<%= department._id %>" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
                       <i class="fas fa-user-edit text-secondary"></i>
                     </a>
@@ -77,13 +77,8 @@
               </tbody>
               <tfoot>
                 <tr>
-                  <th>Product</th>
-                  <th>Category</th>
-                  <th>Price</th>
-                  <th>SKU</th>
-                  <th>Quantity</th>
-                  <th>Status</th>
-                  <th>Action</th>
+                  <th>Name</th>
+                  <th>Manager</th>
                 </tr>
               </tfoot>
             </table>
@@ -108,7 +103,7 @@
 
           var data = {
             type: type,
-            filename: "soft-ui-" + type,
+            filename: "soft-hris-" + type,
           };
 
           if (type === "csv") {
