@@ -7,14 +7,14 @@
         <div class="card-header pb-0">
           <div class="d-lg-flex">
             <div>
-              <h5 class="mb-0">All Products</h5>
+              <h5 class="mb-0">All Departements</h5>
               <p class="text-sm mb-0">
                 A lightweight, extendable, dependency-free javascript HTML table plugin.
               </p>
             </div>
             <div class="ms-auto my-auto mt-lg-0 mt-4">
               <div class="ms-auto my-auto">
-                <a href="new-product.html" class="btn bg-gradient-primary btn-sm mb-0">+&nbsp; New Product</a>
+                <a href="/departments/add" class="btn bg-gradient-primary btn-sm mb-0">+&nbsp; New Departemen</a>
                 <button type="button" class="btn btn-outline-primary btn-sm mb-0" data-bs-toggle="modal" data-bs-target="#import">
                   Import
                 </button>
@@ -52,33 +52,23 @@
               <thead class="thead-light">
                 <tr>
                   <th>Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Position</th>
-                  <th>Departemen</th>
-                  <th>Employed</th>
-                  <th>Salary</th>
+                  <th>Manager</th>
                 </tr>
               </thead>
               <tbody>
-                <% employees.forEach(employee => { %>
+                <% departments.forEach(department => { %>
                 <tr>
-                  <td class="text-sm"><%= employee.name %></td>
-                  <td class="text-sm"><%= employee.email %></td>
-                  <td class="text-sm"><%= employee.phone %></td>
-                  <td class="text-sm"><%= employee.position %></td>
-                  <td class="text-sm">employee.department.name</td>
-                  <td class="text-sm"><%= new Date(employee.hiredate).toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' }) %></td>
-                  <td class="text-sm"><%= employee.salary %></td>
+                  <td class="text-sm"><%= department.name %></td>
+                  <td class="text-sm"><%= department.manager.name %></td>
 
                   <td class="text-sm">
                     <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
                       <i class="fas fa-eye text-secondary"></i>
                     </a>
-                    <a href="/employees/edit/<%= employee._id %>" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
+                    <a href="/departments/edit/<%= department._id %>" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
                       <i class="fas fa-user-edit text-secondary"></i>
                     </a>
-                    <a href="/employees/delete/<%= employee._id %>" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
+                    <a href="/departments/delete/<%= department._id %>" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
                       <i class="fas fa-trash text-secondary"></i>
                     </a>
                   </td>
