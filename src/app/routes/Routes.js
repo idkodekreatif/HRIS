@@ -11,6 +11,6 @@ router.get("/logout", auth.logout);
 
 router.get("/dashboard", authMiddleware, dashboardController.index);
 // employee
-router.get("/employee", authMiddleware, employeeController.create);
+router.get("/employee", authMiddleware, employeeController.index);
 
 module.exports = router;

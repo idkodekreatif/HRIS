@@ -8,7 +8,11 @@ const EmployeeSchema = new Schema({
   gender: { type: String, required: true },
   email: { type: String, required: true },
   phone: { type: String, required: true },
-  department: { type: String, required: true },
+  department: {
+    type: Schema.Types.ObjectId,
+    ref: "Department",
+    required: true,
+  },
   position: { type: String, required: true },
   hiredate: { type: Date, required: true },
   salary: { type: Number, required: true },
