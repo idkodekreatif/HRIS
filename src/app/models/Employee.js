@@ -11,7 +11,6 @@ const EmployeeSchema = new Schema({
   department: {
     type: Schema.Types.ObjectId,
     ref: "Department",
-    required: true,
   },
   position: { type: String, required: true },
   hiredate: { type: Date, required: true },

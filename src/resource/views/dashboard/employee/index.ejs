@@ -67,7 +67,7 @@
                   <td class="text-sm"><%= employee.email %></td>
                   <td class="text-sm"><%= employee.phone %></td>
                   <td class="text-sm"><%= employee.position %></td>
-                  <td class="text-sm text-danger">employee.department.name</td>
+                  <td class="text-sm text-danger"><%= employee.department.name %></td>
                   <td class="text-sm"><%= new Date(employee.hiredate).toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' }) %></td>
                   <td class="text-sm"><%= employee.salary %></td>
 
