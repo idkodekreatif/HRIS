@@ -15,15 +15,18 @@ router.get("/dashboard", authMiddleware, dashboardController.index);
 router.get("/employee", authMiddleware, employeeController.index);
 // departemens
 router.get("/departments", authMiddleware, departmentController.index);
-router.get(
-  "/departments/add",
-  authMiddleware,
-  departmentController.renderAddDepartmentForm
-);
+router.get("/departments/add", authMiddleware, departmentController.create);
+router.post("/departments/add", authMiddleware, departmentController.store);
+router.get("/departments/edit/:id", authMiddleware, departmentController.edit);
 router.post(
-  "/departments/add",
+  "/departments/edit/:id",
   authMiddleware,
-  departmentController.addDepartment
+  departmentController.update
+);
+router.get(
+  "/departments/delete/:id",
+  authMiddleware,
+  departmentController.delete
 );
 
 module.exports = router;
