@@ -13,6 +13,9 @@ router.get("/logout", auth.logout);
 router.get("/dashboard", authMiddleware, dashboardController.index);
 // employee
 router.get("/employee", authMiddleware, employeeController.index);
+router.get("/employee/add", authMiddleware, employeeController.create);
+router.post("/employee/add", authMiddleware, employeeController.store);
+
 // departemens
 router.get("/departments", authMiddleware, departmentController.index);
 router.get("/departments/add", authMiddleware, departmentController.create);
