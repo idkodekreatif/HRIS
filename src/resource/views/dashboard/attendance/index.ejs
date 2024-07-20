@@ -1,0 +1,118 @@
+<body class="g-sidenav-show  bg-gray-100">
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+
+        <div class="card-header pb-0">
+          <div class="d-lg-flex">
+            <div>
+              <h5 class="mb-0">All Attendance</h5>
+              <p class="text-sm mb-0">
+                A lightweight, extendable, dependency-free javascript HTML table plugin.
+              </p>
+            </div>
+            <div class="ms-auto my-auto mt-lg-0 mt-4">
+              <div class="ms-auto my-auto">
+                <a href="/attendance/add" class="btn bg-gradient-info btn-sm mb-0">+&nbsp; New Attendance</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body px-0 pb-0">
+          <div class="table-responsive">
+            <table class="table table-flush" id="products-list">
+              <thead class="thead-light">
+                <tr>
+                  <th>Employee</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% attendances.forEach(attendance => { %>
+                <tr>
+                  <td class="text-sm"><%= attendance.employee.name %></td>
+                  <td class="text-sm"><%= new Date(attendance.date).toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' }) %></td>
+                  <td class="text-sm">
+                    <% if ( attendance.status == "present") { %>
+                    <span class="badge badge-dot me-4">
+                      <i class="bg-success"></i>
+                      <span class="text-dark text-xs">Present</span>
+                    </span>
+                    <% } else if(attendance.status == "absent"){ %>
+                    <span class="badge badge-dot me-4">
+                      <i class="bg-primary"></i>
+                      <span class="text-dark text-xs">Absent</span>
+                    </span>
+                    <% } else if(attendance.status == "late") {%>
+                    <span class="badge badge-dot me-4">
+                      <i class="bg-warning"></i>
+                      <span class="text-dark text-xs">Late</span>
+                    </span>
+                    <% }else if(attendance.status == "leave"){ %>
+                    <span class="badge badge-dot me-4">
+                      <i class="bg-danger"></i>
+                      <span class="text-dark text-xs">Leave</span>
+                    </span>
+                    <% } %>
+                  </td>
+                  <td class="text-sm"><%- attendance.description %></td>
+
+                  <td class="text-sm">
+                    <!-- <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
+                      <i class="fas fa-eye text-secondary"></i>
+                    </a> -->
+                    <a href="/attendance/edit/<%= attendance._id %>" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
+                      <i class="fas fa-user-edit text-secondary"></i>
+                    </a>
+                    <a href="/attendance/delete/<%= attendance._id %>" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
+                      <i class="fas fa-trash text-secondary"></i>
+                    </a>
+                  </td>
+                </tr>
+                <% }) %>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Employee</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Description</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../../assets/js/plugins/datatables.js"></script>
+  <script>
+    if (document.getElementById('products-list')) {
+      const dataTableSearch = new simpleDatatables.DataTable("#products-list", {
+        searchable: true,
+        fixedHeight: false,
+        perPage: 7
+      });
+
+      document.querySelectorAll(".export").forEach(function(el) {
+        el.addEventListener("click", function(e) {
+          var type = el.dataset.type;
+
+          var data = {
+            type: type,
+            filename: "soft-hris-" + type,
+          };
+
+          if (type === "csv") {
+            data.columnDelimiter = "|";
+          }
+
+          dataTableSearch.export(data);
+        });
+      });
+    };
+  </script>

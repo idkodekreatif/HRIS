@@ -26,7 +26,7 @@
         <input class="form-control" name="position" value="<%= employee.position %>" type="text" placeholder="Please input position" required>
 
         <label class="mt-4 form-label">Departemen</label>
-        <select name="department" class="form-control" required>
+        <select name="department" class="form-control choices-multiple-remove-button" id="choices-multiple-remove-button" required>
           <% departments.forEach(department => { %>
           <option value="<%= department._id %>" <%= employee.department.equals(department._id) ? 'selected' : '' %>><%= department.name %> (Manager: <%= department.manager.name %>)</option>
           <% }) %>
@@ -39,7 +39,7 @@
           </div>
           <div class="col-6">
             <label class="form-label">Gender</label>
-            <select class="form-control" name="gender" id="choices-multiple-remove-button">
+            <select class="form-control choices-multiple-remove-button" name="gender" id="choices-multiple-remove-button">
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
@@ -58,7 +58,7 @@
         </div>
         <div class="d-flex justify-content-end mt-4">
           <button type="button" name="button" class="btn btn-light m-0">Cancel</button>
-          <button type="submit" name="button" class="btn bg-gradient-primary m-0 ms-2">Update Employee</button>
+          <button type="submit" name="button" class="btn bg-gradient-info m-0 ms-2">Update Employee</button>
         </div>
       </form>
     </div>
@@ -76,8 +76,14 @@
         allowInput: true
       });
     }
+
+    const choiceElements = document.querySelectorAll('.choices-multiple-remove-button');
+    choiceElements.forEach(element => {
+      new Choices(element, {
+        removeItemButton: true
+      });
+    });
   });
-</script>
-<script>
-  CKEDITOR.replace('content');
+
+  CKEDITOR.replace('description');
 </script>

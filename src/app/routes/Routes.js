@@ -5,6 +5,7 @@ const dashboardController = require("../controllers/dashboard/dashboardControlle
 const authMiddleware = require("../middlewares/authMiddleware");
 const employeeController = require("../controllers/dashboard/employee/employeeController");
 const departmentController = require("../controllers/dashboard/departemen/departmentController");
+const attendanceController = require("../controllers/dashboard/attendance/attendanceController");
 
 router.get("/", auth.index);
 router.post("/login", auth.login);
@@ -35,5 +36,10 @@ router.get(
   authMiddleware,
   departmentController.delete
 );
+
+// Attendance
+router.get("/attendance", authMiddleware, attendanceController.index);
+router.get("/attendance/add", authMiddleware, attendanceController.create);
+router.post("/attendance/add", authMiddleware, attendanceController.store);
 
 module.exports = router;
