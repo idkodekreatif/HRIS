@@ -58,6 +58,26 @@ exports.store = async (req, res) => {
   }
 };
 
+exports.show = async (req, res) => {
+  try {
+    const employee = await Employee.findById(req.params.id).populate(
+      "department"
+    );
+    const departments = await Department.find().populate("manager");
+    if (!employee) {
+      return res.status(404).send("Employee not found");
+    }
+    res.render("dashboard/employee/show", {
+      employee,
+      departments,
+      title: "Show Employee",
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+
 exports.edit = async (req, res) => {
   try {
     const employee = await Employee.findById(req.params.id).populate(

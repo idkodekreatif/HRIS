@@ -15,6 +15,7 @@ router.get("/dashboard", authMiddleware, dashboardController.index);
 router.get("/employee", authMiddleware, employeeController.index);
 router.get("/employee/add", authMiddleware, employeeController.create);
 router.post("/employee/add", authMiddleware, employeeController.store);
+router.get("/employee/show/:id", authMiddleware, employeeController.show);
 router.get("/employee/edit/:id", authMiddleware, employeeController.edit);
 router.post("/employee/edit/:id", employeeController.update);
 router.get("/employee/delete/:id", employeeController.delete);

@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-lg-9 col-12 mx-auto">
+    <div class="card card-body mt-4">
+      <h6 class="mb-0">Show Employee</h6>
+      <p class="text-sm mb-0">Show Employee</p>
+      <hr class="horizontal dark my-3">
+      <label for="projectName" class="form-label">Name</label>
+      <input type="text" name="name" class="form-control" id="" value="<%= employee.name %>" placeholder="Name" disabled>
+
+      <label for="projectName" class="form-label">Address</label>
+      <textarea name="address" id="" class="form-control" value="<%= employee.address %>" placeholder="Address" disabled><%= employee.address %></textarea>
+
+      <div class="row">
+        <div class="col-6">
+          <label class="form-label">Email</label>
+          <input class="form-control" name="email" value="<%= employee.email %>" type="email" placeholder="Please input email" disabled>
+        </div>
+        <div class="col-6">
+          <label class="form-label">Phone</label>
+          <input class="form-control" name="phone" value="<%= employee.phone %>" type="text" placeholder="Please input phone" disabled>
+        </div>
+      </div>
+
+      <label class="mt-4 form-label">Position</label>
+      <input class="form-control" name="position" value="<%= employee.position %>" type="text" placeholder="Please input position" disabled>
+
+      <label class="mt-4 form-label">Departemen</label>
+      <select name="department" class="form-control" disabled>
+        <% departments.forEach(department => { %>
+        <option value="<%= department._id %>" <%= employee.department.equals(department._id) ? 'selected' : '' %>><%= department.name %> (Manager: <%= department.manager.name %>)</option>
+        <% }) %>
+      </select>
+
+      <div class="row">
+        <div class="col-6">
+          <label class="form-label">Birthday</label>
+          <input class="form-control datetimepicker" name="birth" value="<%= employee.birth.toISOString().split('T')[0] %>" type="date" placeholder="Please select birthday date" data-input disabled>
+        </div>
+        <div class="col-6">
+          <label class="form-label">Gender</label>
+          <select class="form-control" name="gender" id="choices-multiple-remove-button" disabled>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <label class="form-label">Salary</label>
+          <input class="form-control" name="salary" value="<%= employee.salary %>" type="number" placeholder="Salary" disabled>
+        </div>
+        <div class="col-6">
+          <label class="form-label">Hire Date</label>
+          <input class="form-control datetimepicker" name="hiredate" value="<%= employee.hiredate.toISOString().split('T')[0] %>" type="date" placeholder="Please select start date" data-input disabled>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
