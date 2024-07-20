@@ -31,19 +31,44 @@ exports.store = async (req, res) => {
   try {
     const { employee, payPeriod, basicSalary, allowance, deductions } =
       req.body;
-    const netsalary = basicSalary + allowance - deductions;
+
+    // Ensure all salary-related values are parsed as numbers
+    const basicSalaryNum = Number(basicSalary);
+    const allowanceNum = Number(allowance);
+    const deductionsNum = Number(deductions);
+
+    const netsalary = basicSalaryNum + allowanceNum - deductionsNum;
 
     const payroll = new Payroll({
       employee,
       payPeriod,
-      basicSalary,
-      allowance,
-      deductions,
+      basicSalary: basicSalaryNum,
+      allowance: allowanceNum,
+      deductions: deductionsNum,
       netsalary,
     });
 
     await payroll.save();
     res.redirect("/payroll");
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
+
+exports.show = async (req, res) => {
+  try {
+    const payroll = await Payroll.findById(req.params.id).populate("employee");
+    const employees = await Employee.find();
+
+    if (!payroll) {
+      return res.status(404).send("Payroll not found");
+    }
+    res.render("dashboard/payroll/show", {
+      payroll,
+      employees,
+      title: "Edit Payroll",
+    });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -73,18 +98,26 @@ exports.update = async (req, res) => {
   try {
     const { employee, payPeriod, basicSalary, allowance, deductions } =
       req.body;
-    const netsalary = basicSalary + allowance - deductions;
+
+    // Ensure all salary-related values are parsed as numbers
+    const basicSalaryNum = Number(basicSalary);
+    const allowanceNum = Number(allowance);
+    const deductionsNum = Number(deductions);
+
+    const netsalary = basicSalaryNum + allowanceNum - deductionsNum;
 
     let payroll = await Payroll.findById(req.params.id);
     if (!payroll) {
       return res.status(404).send("Payroll not found");
     }
+
     payroll.employee = employee;
     payroll.payPeriod = payPeriod;
-    payroll.basicSalary = basicSalary;
-    payroll.allowance = allowance;
-    payroll.deductions = deductions;
+    payroll.basicSalary = basicSalaryNum;
+    payroll.allowance = allowanceNum;
+    payroll.deductions = deductionsNum;
     payroll.netsalary = netsalary;
+
     await payroll.save();
     res.redirect("/payroll");
   } catch (err) {

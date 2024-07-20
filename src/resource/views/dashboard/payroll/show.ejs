@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-lg-9 col-12 mx-auto">
+    <div class="card card-body mt-4">
+      <h6 class="mb-0">Update Payroll</h6>
+      <p class="text-sm mb-0">Update new Payroll</p>
+      <hr class="horizontal dark my-3">
+      <label for="projectName" class="form-label">Name</label>
+      <select name="employee" id="employee" class="form-control choices-multiple-remove-button" disabled>
+        <% employees.forEach(employee => { %>
+        <option value="<%= employee._id %>" <%= employee._id.equals(payroll.employee._id) ? 'selected' : '' %>><%= employee.name %></option>
+        <% }) %>
+      </select>
+
+
+      <div class="row">
+        <div class="col-6">
+          <label class="form-label">Pay Period</label>
+          <input class="form-control datetimepicker" name="payPeriod" value="<%= new Date(payroll.payPeriod).toISOString().split('T')[0] %>" placeholder="yyyy-dd-mm" type="date" disabled>
+        </div>
+        <div class="col-6">
+          <label class="form-label">Basic Salary</label>
+          <input type="number" name="basicSalary" value="<%= payroll.basicSalary %>" class="form-control" placeholder="IDR. xxx.xxx.xxx" disabled>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6">
+          <label class="form-label">Allowance</label>
+          <input type="number" name="allowance" value="<%= payroll.allowance %>" step="0.01" class="form-control" placeholder="IDR. xxx.xxx.xxx" disabled>
+        </div>
+        <div class="col-6">
+          <label class="form-label">Deductions</label>
+          <input type="number" name="deductions" step="0.01" value="<%= payroll.deductions %>" class="form-control" placeholder="IDR. xxx.xxx.xxx" disabled>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script src="/public/assets/js/plugins/choices.min.js"></script>
+<script src="/public/assets/js/plugins/quill.min.js"></script>
+<script src="/public/assets/js/plugins/flatpickr.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    if (document.querySelector('.datetimepicker')) {
+      flatpickr('.datetimepicker', {
+        allowInput: true
+      });
+    }
+
+    const choiceElements = document.querySelectorAll('.choices-multiple-remove-button');
+    choiceElements.forEach(element => {
+      new Choices(element, {
+        removeItemButton: true
+      });
+    });
+  });
+
+  CKEDITOR.replace('description');
+</script>

@@ -58,6 +58,7 @@ router.get(
 router.get("/payroll", authMiddleware, payrollController.index);
 router.get("/payroll/add", authMiddleware, payrollController.create);
 router.post("/payroll/add", authMiddleware, payrollController.store);
+router.get("/payroll/show/:id", authMiddleware, payrollController.show);
 router.get("/payroll/edit/:id", authMiddleware, payrollController.edit);
 router.post("/payroll/edit/:id", authMiddleware, payrollController.update);
 router.get("/payroll/delete/:id", authMiddleware, payrollController.delete);

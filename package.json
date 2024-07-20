@@ -22,6 +22,7 @@
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.3",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.5.1"
+    "mongoose": "^8.5.1",
+    "numeral": "^2.0.6"
   }
 }

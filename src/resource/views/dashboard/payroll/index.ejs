@@ -1,9 +1,7 @@
-<body class="g-sidenav-show  bg-gray-100">
-
+<body class="g-sidenav-show bg-gray-100">
   <div class="row">
     <div class="col-12">
       <div class="card">
-
         <div class="card-header pb-0">
           <div class="d-lg-flex">
             <div>
@@ -15,33 +13,6 @@
             <div class="ms-auto my-auto mt-lg-0 mt-4">
               <div class="ms-auto my-auto">
                 <a href="/payroll/add" class="btn bg-gradient-info btn-sm mb-0">+&nbsp; New Payroll</a>
-                <!-- <button type="button" class="btn btn-outline-primary btn-sm mb-0" data-bs-toggle="modal" data-bs-target="#import">
-                  Import
-                </button>
-                <div class="modal fade" id="import" tabindex="-1" aria-hidden="true">
-                  <div class="modal-dialog mt-lg-10">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="ModalLabel">Import CSV</h5>
-                        <i class="fas fa-upload ms-3"></i>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <p>You can browse your computer for a file.</p>
-                        <input type="text" placeholder="Browse file..." class="form-control mb-3">
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value id="importCheck" checked>
-                          <label class="custom-control-label" for="importCheck">I accept the terms and conditions</label>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn bg-gradient-secondary btn-sm" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn bg-gradient-primary btn-sm">Upload</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <button class="btn btn-outline-primary btn-sm export mb-0 mt-sm-0 mt-1" data-type="csv" type="button" name="button">Export</button> -->
               </div>
             </div>
           </div>
@@ -57,26 +28,26 @@
                   <th>Allowance</th>
                   <th>Deductions</th>
                   <th>Net Salary</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <% payrolls.forEach(payroll => { %>
                 <tr>
                   <td class="text-sm"><%= payroll.employee.name %></td>
-                  <td class="text-sm"><%= new Date(payroll.payPeriod).toISOString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' }).split('T')[0] %></td>
-                  <td class="text-sm"><%= payroll.basicSalary %></td>
-                  <td class="text-sm"><%= payroll.allowance %></td>
-                  <td class="text-sm"><%= payroll.deductions %></td>
-                  <td class="text-sm"><%= payroll.netsalary %></td>
-
+                  <td class="text-sm"><%= new Date(payroll.payPeriod).toISOString().split('T')[0] %></td>
+                  <td class="text-sm currency"><%= Number(payroll.basicSalary) %></td>
+                  <td class="text-sm currency"><%= Number(payroll.allowance) %></td>
+                  <td class="text-sm currency"><%= Number(payroll.deductions) %></td>
+                  <td class="text-sm currency"><%= Number(payroll.netsalary) %></td>
                   <td class="text-sm">
-                    <a href="/payroll/show/<%= payroll._id %>" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
+                    <a href="/payroll/show/<%= payroll._id %>" data-bs-toggle="tooltip" data-bs-original-title="Preview payroll">
                       <i class="fas fa-eye text-secondary"></i>
                     </a>
-                    <a href="/payroll/edit/<%= payroll._id %>" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
+                    <a href="/payroll/edit/<%= payroll._id %>" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit payroll">
                       <i class="fas fa-user-edit text-secondary"></i>
                     </a>
-                    <a href="/payroll/delete/<%= payroll._id %>" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
+                    <a href="/payroll/delete/<%= payroll._id %>" data-bs-toggle="tooltip" data-bs-original-title="Delete payroll">
                       <i class="fas fa-trash text-secondary"></i>
                     </a>
                   </td>
@@ -91,6 +62,7 @@
                   <th>Allowance</th>
                   <th>Deductions</th>
                   <th>Net Salary</th>
+                  <th>Actions</th>
                 </tr>
               </tfoot>
             </table>
@@ -100,7 +72,8 @@
     </div>
   </div>
 
-  <script src="../../../assets/js/plugins/datatables.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+  <script src="/public/assets/js/plugins/datatables.js"></script>
   <script>
     if (document.getElementById('products-list')) {
       const dataTableSearch = new simpleDatatables.DataTable("#products-list", {
@@ -112,10 +85,9 @@
       document.querySelectorAll(".export").forEach(function(el) {
         el.addEventListener("click", function(e) {
           var type = el.dataset.type;
-
           var data = {
             type: type,
-            filename: "soft-ui-" + type,
+            filename: "payroll-" + type,
           };
 
           if (type === "csv") {
@@ -125,5 +97,17 @@
           dataTableSearch.export(data);
         });
       });
-    };
+    }
+
+    function formatCurrency(value) {
+      return numeral(value).format('IDR0,0.00');
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll('.currency').forEach(function(element) {
+        const numericValue = Number(element.textContent);
+        element.textContent = formatCurrency(numericValue);
+      });
+    });
   </script>
+</body>
