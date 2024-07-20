@@ -5,7 +5,7 @@ module.exports = function (req, res, next) {
   const token = req.cookies.token;
 
   if (!token) {
-    return res.redirect("/login");
+    return res.redirect("/");
   }
 
   try {
@@ -15,6 +15,6 @@ module.exports = function (req, res, next) {
   } catch (err) {
     console.error(err.message);
     res.clearCookie("token");
-    res.redirect("/login");
+    res.redirect("/");
   }
 };

@@ -7,15 +7,15 @@
         <div class="card-header pb-0">
           <div class="d-lg-flex">
             <div>
-              <h5 class="mb-0">All Products</h5>
+              <h5 class="mb-0">All Employees</h5>
               <p class="text-sm mb-0">
                 A lightweight, extendable, dependency-free javascript HTML table plugin.
               </p>
             </div>
             <div class="ms-auto my-auto mt-lg-0 mt-4">
               <div class="ms-auto my-auto">
-                <a href="new-product.html" class="btn bg-gradient-primary btn-sm mb-0">+&nbsp; New Product</a>
-                <button type="button" class="btn btn-outline-primary btn-sm mb-0" data-bs-toggle="modal" data-bs-target="#import">
+                <a href="/employee/add" class="btn bg-gradient-info btn-sm mb-0">+&nbsp; New Employee</a>
+                <!-- <button type="button" class="btn btn-outline-primary btn-sm mb-0" data-bs-toggle="modal" data-bs-target="#import">
                   Import
                 </button>
                 <div class="modal fade" id="import" tabindex="-1" aria-hidden="true">
@@ -41,7 +41,7 @@
                     </div>
                   </div>
                 </div>
-                <button class="btn btn-outline-primary btn-sm export mb-0 mt-sm-0 mt-1" data-type="csv" type="button" name="button">Export</button>
+                <button class="btn btn-outline-primary btn-sm export mb-0 mt-sm-0 mt-1" data-type="csv" type="button" name="button">Export</button> -->
               </div>
             </div>
           </div>
@@ -67,18 +67,18 @@
                   <td class="text-sm"><%= employee.email %></td>
                   <td class="text-sm"><%= employee.phone %></td>
                   <td class="text-sm"><%= employee.position %></td>
-                  <td class="text-sm">employee.department.name</td>
+                  <td class="text-sm"><%= employee.department.name %></td>
                   <td class="text-sm"><%= new Date(employee.hiredate).toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' }) %></td>
                   <td class="text-sm"><%= employee.salary %></td>
 
                   <td class="text-sm">
-                    <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
+                    <a href="/employee/show/<%= employee._id %>" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
                       <i class="fas fa-eye text-secondary"></i>
                     </a>
-                    <a href="/employees/edit/<%= employee._id %>" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
+                    <a href="/employee/edit/<%= employee._id %>" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
                       <i class="fas fa-user-edit text-secondary"></i>
                     </a>
-                    <a href="/employees/delete/<%= employee._id %>" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
+                    <a href="/employee/delete/<%= employee._id %>" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
                       <i class="fas fa-trash text-secondary"></i>
                     </a>
                   </td>
@@ -87,13 +87,13 @@
               </tbody>
               <tfoot>
                 <tr>
-                  <th>Product</th>
-                  <th>Category</th>
-                  <th>Price</th>
-                  <th>SKU</th>
-                  <th>Quantity</th>
-                  <th>Status</th>
-                  <th>Action</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Position</th>
+                  <th>Departemen</th>
+                  <th>Employed</th>
+                  <th>Salary</th>
                 </tr>
               </tfoot>
             </table>

@@ -1,0 +1,113 @@
+<body class="g-sidenav-show bg-gray-100">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header pb-0">
+          <div class="d-lg-flex">
+            <div>
+              <h5 class="mb-0">All Payroll</h5>
+              <p class="text-sm mb-0">
+                A lightweight, extendable, dependency-free javascript HTML table plugin.
+              </p>
+            </div>
+            <div class="ms-auto my-auto mt-lg-0 mt-4">
+              <div class="ms-auto my-auto">
+                <a href="/payroll/add" class="btn bg-gradient-info btn-sm mb-0">+&nbsp; New Payroll</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body px-0 pb-0">
+          <div class="table-responsive">
+            <table class="table table-flush" id="products-list">
+              <thead class="thead-light">
+                <tr>
+                  <th>Employee</th>
+                  <th>Pay Period</th>
+                  <th>Basic Salary</th>
+                  <th>Allowance</th>
+                  <th>Deductions</th>
+                  <th>Net Salary</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% payrolls.forEach(payroll => { %>
+                <tr>
+                  <td class="text-sm"><%= payroll.employee.name %></td>
+                  <td class="text-sm"><%= new Date(payroll.payPeriod).toISOString().split('T')[0] %></td>
+                  <td class="text-sm currency"><%= Number(payroll.basicSalary) %></td>
+                  <td class="text-sm currency"><%= Number(payroll.allowance) %></td>
+                  <td class="text-sm currency"><%= Number(payroll.deductions) %></td>
+                  <td class="text-sm currency"><%= Number(payroll.netsalary) %></td>
+                  <td class="text-sm">
+                    <a href="/payroll/show/<%= payroll._id %>" data-bs-toggle="tooltip" data-bs-original-title="Preview payroll">
+                      <i class="fas fa-eye text-secondary"></i>
+                    </a>
+                    <a href="/payroll/edit/<%= payroll._id %>" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit payroll">
+                      <i class="fas fa-user-edit text-secondary"></i>
+                    </a>
+                    <a href="/payroll/delete/<%= payroll._id %>" data-bs-toggle="tooltip" data-bs-original-title="Delete payroll">
+                      <i class="fas fa-trash text-secondary"></i>
+                    </a>
+                  </td>
+                </tr>
+                <% }) %>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Employee</th>
+                  <th>Pay Period</th>
+                  <th>Basic Salary</th>
+                  <th>Allowance</th>
+                  <th>Deductions</th>
+                  <th>Net Salary</th>
+                  <th>Actions</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+  <script src="/public/assets/js/plugins/datatables.js"></script>
+  <script>
+    if (document.getElementById('products-list')) {
+      const dataTableSearch = new simpleDatatables.DataTable("#products-list", {
+        searchable: true,
+        fixedHeight: false,
+        perPage: 7
+      });
+
+      document.querySelectorAll(".export").forEach(function(el) {
+        el.addEventListener("click", function(e) {
+          var type = el.dataset.type;
+          var data = {
+            type: type,
+            filename: "payroll-" + type,
+          };
+
+          if (type === "csv") {
+            data.columnDelimiter = "|";
+          }
+
+          dataTableSearch.export(data);
+        });
+      });
+    }
+
+    function formatCurrency(value) {
+      return numeral(value).format('IDR0,0.00');
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll('.currency').forEach(function(element) {
+        const numericValue = Number(element.textContent);
+        element.textContent = formatCurrency(numericValue);
+      });
+    });
+  </script>
+</body>

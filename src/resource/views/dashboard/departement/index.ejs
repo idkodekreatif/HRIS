@@ -14,8 +14,8 @@
             </div>
             <div class="ms-auto my-auto mt-lg-0 mt-4">
               <div class="ms-auto my-auto">
-                <a href="/departments/add" class="btn bg-gradient-primary btn-sm mb-0">+&nbsp; New Departemen</a>
-                <button type="button" class="btn btn-outline-primary btn-sm mb-0" data-bs-toggle="modal" data-bs-target="#import">
+                <a href="/departments/add" class="btn bg-gradient-info btn-sm mb-0">+&nbsp; New Departemen</a>
+                <!-- <button type="button" class="btn btn-outline-primary btn-sm mb-0" data-bs-toggle="modal" data-bs-target="#import">
                   Import
                 </button>
                 <div class="modal fade" id="import" tabindex="-1" aria-hidden="true">
@@ -41,7 +41,7 @@
                     </div>
                   </div>
                 </div>
-                <button class="btn btn-outline-primary btn-sm export mb-0 mt-sm-0 mt-1" data-type="csv" type="button" name="button">Export</button>
+                <button class="btn btn-outline-primary btn-sm export mb-0 mt-sm-0 mt-1" data-type="csv" type="button" name="button">Export</button> -->
               </div>
             </div>
           </div>
@@ -62,9 +62,9 @@
                   <td class="text-sm"><%= department.manager.name %></td>
 
                   <td class="text-sm">
-                    <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
+                    <!-- <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
                       <i class="fas fa-eye text-secondary"></i>
-                    </a>
+                    </a> -->
                     <a href="/departments/edit/<%= department._id %>" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
                       <i class="fas fa-user-edit text-secondary"></i>
                     </a>
@@ -77,13 +77,8 @@
               </tbody>
               <tfoot>
                 <tr>
-                  <th>Product</th>
-                  <th>Category</th>
-                  <th>Price</th>
-                  <th>SKU</th>
-                  <th>Quantity</th>
-                  <th>Status</th>
-                  <th>Action</th>
+                  <th>Name</th>
+                  <th>Manager</th>
                 </tr>
               </tfoot>
             </table>
@@ -108,7 +103,7 @@
 
           var data = {
             type: type,
-            filename: "soft-ui-" + type,
+            filename: "soft-hris-" + type,
           };
 
           if (type === "csv") {
