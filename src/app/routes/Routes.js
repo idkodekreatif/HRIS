@@ -6,6 +6,7 @@ const authMiddleware = require("../middlewares/authMiddleware");
 const employeeController = require("../controllers/dashboard/employee/employeeController");
 const departmentController = require("../controllers/dashboard/departemen/departmentController");
 const attendanceController = require("../controllers/dashboard/attendance/attendanceController");
+const payrollController = require("../controllers/dashboard/payroll/payrollController");
 
 router.get("/", auth.index);
 router.post("/login", auth.login);
@@ -52,5 +53,13 @@ router.get(
   authMiddleware,
   attendanceController.delete
 );
+
+// Payroll
+router.get("/payroll", authMiddleware, payrollController.index);
+router.get("/payroll/add", authMiddleware, payrollController.create);
+router.post("/payroll/add", authMiddleware, payrollController.store);
+router.get("/payroll/edit/:id", authMiddleware, payrollController.edit);
+router.post("/payroll/edit/:id", authMiddleware, payrollController.update);
+router.get("/payroll/delete/:id", authMiddleware, payrollController.delete);
 
 module.exports = router;
