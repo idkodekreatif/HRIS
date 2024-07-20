@@ -90,15 +90,3 @@ exports.delete = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
-
-// exports.delete = async (req, res) => {
-//   const { id } = req.params;
-
-//   try {
-//     await Department.findByIdAndDelete(id);
-//     res.redirect("/departments");
-//   } catch (err) {
-//     console.error(err.message);
-//     res.status(500).send("Server Error");
-//   }
-// };

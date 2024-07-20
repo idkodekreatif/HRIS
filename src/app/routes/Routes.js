@@ -18,8 +18,8 @@ router.get("/employee/add", authMiddleware, employeeController.create);
 router.post("/employee/add", authMiddleware, employeeController.store);
 router.get("/employee/show/:id", authMiddleware, employeeController.show);
 router.get("/employee/edit/:id", authMiddleware, employeeController.edit);
-router.post("/employee/edit/:id", employeeController.update);
-router.get("/employee/delete/:id", employeeController.delete);
+router.post("/employee/edit/:id", authMiddleware, employeeController.update);
+router.get("/employee/delete/:id", authMiddleware, employeeController.delete);
 
 // departemens
 router.get("/departments", authMiddleware, departmentController.index);
@@ -41,5 +41,16 @@ router.get(
 router.get("/attendance", authMiddleware, attendanceController.index);
 router.get("/attendance/add", authMiddleware, attendanceController.create);
 router.post("/attendance/add", authMiddleware, attendanceController.store);
+router.get("/attendance/edit/:id", authMiddleware, attendanceController.edit);
+router.post(
+  "/attendance/edit/:id",
+  authMiddleware,
+  attendanceController.update
+);
+router.get(
+  "/attendance/delete/:id",
+  authMiddleware,
+  attendanceController.delete
+);
 
 module.exports = router;
