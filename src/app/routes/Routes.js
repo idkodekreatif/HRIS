@@ -21,10 +21,7 @@ router.get("/logout", auth.logout);
 router.get("/dashboard", authMiddleware, dashboardController.index);
 
 // Employee routes
-router
-  .route("/employee")
-  .get(authMiddleware, employeeController.index)
-  .post(authMiddleware, employeeController.store);
+router.route("/employee").get(authMiddleware, employeeController.index);
 router
   .route("/employee/add")
   .get(authMiddleware, employeeController.create)
@@ -39,10 +36,7 @@ router
   .get(authMiddleware, employeeController.delete);
 
 // Department routes
-router
-  .route("/departments")
-  .get(authMiddleware, departmentController.index)
-  .post(authMiddleware, departmentController.store);
+router.route("/departments").get(authMiddleware, departmentController.index);
 router
   .route("/departments/add")
   .get(authMiddleware, departmentController.create)
@@ -56,10 +50,7 @@ router
   .get(authMiddleware, departmentController.delete);
 
 // Attendance routes
-router
-  .route("/attendance")
-  .get(authMiddleware, attendanceController.index)
-  .post(authMiddleware, attendanceController.store);
+router.route("/attendance").get(authMiddleware, attendanceController.index);
 router
   .route("/attendance/add")
   .get(authMiddleware, attendanceController.create)
@@ -73,10 +64,7 @@ router
   .get(authMiddleware, attendanceController.delete);
 
 // Payroll routes
-router
-  .route("/payroll")
-  .get(authMiddleware, payrollController.index)
-  .post(authMiddleware, payrollController.store);
+router.route("/payroll").get(authMiddleware, payrollController.index);
 router
   .route("/payroll/add")
   .get(authMiddleware, payrollController.create)
@@ -91,10 +79,7 @@ router
   .get(authMiddleware, payrollController.delete);
 
 // Leave routes
-router
-  .route("/leave")
-  .get(authMiddleware, leaveController.index)
-  .post(authMiddleware, leaveController.store);
+router.route("/leave").get(authMiddleware, leaveController.index);
 router
   .route("/leave/add")
   .get(authMiddleware, leaveController.create)
@@ -107,10 +92,7 @@ router
 router.route("/leave/delete/:id").get(authMiddleware, leaveController.delete);
 
 // Rple routes
-router
-  .route("/role")
-  .get(authMiddleware, roleController.index)
-  .post(authMiddleware, roleController.store);
+router.route("/role").get(authMiddleware, roleController.index);
 router
   .route("/role/add")
   .get(authMiddleware, roleController.create)
@@ -122,10 +104,7 @@ router
 router.route("/role/delete/:id").get(authMiddleware, roleController.delete);
 
 // Permission routes
-router
-  .route("/permission")
-  .get(authMiddleware, permissionController.index)
-  .post(authMiddleware, permissionController.store);
+router.route("/permission").get(authMiddleware, permissionController.index);
 router
   .route("/permission/add")
   .get(authMiddleware, permissionController.create)
@@ -141,8 +120,7 @@ router
 // model Has Role routes
 router
   .route("/model-has-role")
-  .get(authMiddleware, modelHasRoleController.index)
-  .post(authMiddleware, modelHasRoleController.store);
+  .get(authMiddleware, modelHasRoleController.index);
 router
   .route("/model-has-role/add")
   .get(authMiddleware, modelHasRoleController.create)
@@ -158,8 +136,7 @@ router
 // model Has Permission routes
 router
   .route("/model-has-permission")
-  .get(authMiddleware, modelHasPermissionController.index)
-  .post(authMiddleware, modelHasPermissionController.store);
+  .get(authMiddleware, modelHasPermissionController.index);
 router
   .route("/model-has-permission/add")
   .get(authMiddleware, modelHasPermissionController.create)
@@ -175,8 +152,7 @@ router
 // role Has Permission routes
 router
   .route("/role-has-permission")
-  .get(authMiddleware, roleHasPermissionController.index)
-  .post(authMiddleware, roleHasPermissionController.store);
+  .get(authMiddleware, roleHasPermissionController.index);
 router
   .route("/role-has-permission/add")
   .get(authMiddleware, roleHasPermissionController.create)

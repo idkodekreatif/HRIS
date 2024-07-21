@@ -30,7 +30,7 @@ exports.store = async (req, res) => {
     const role = new Role({ name, guardName });
 
     await role.save();
-    res.redirect("/roles");
+    res.redirect("/role");
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -68,7 +68,7 @@ exports.update = async (req, res) => {
     role.guardName = guardName;
     await role.save();
 
-    res.redirect("/roles");
+    res.redirect("/role");
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -78,7 +78,7 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   try {
     await Role.findByIdAndDelete(req.params.id);
-    res.redirect("/roles");
+    res.redirect("/role");
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
