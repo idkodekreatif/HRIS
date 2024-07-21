@@ -7,6 +7,7 @@ const employeeController = require("../controllers/dashboard/employee/employeeCo
 const departmentController = require("../controllers/dashboard/departemen/departmentController");
 const attendanceController = require("../controllers/dashboard/attendance/attendanceController");
 const payrollController = require("../controllers/dashboard/payroll/payrollController");
+const leaveController = require("../controllers/dashboard/leave/leaveController");
 
 router.get("/", auth.index);
 router.post("/login", auth.login);
@@ -62,5 +63,14 @@ router.get("/payroll/show/:id", authMiddleware, payrollController.show);
 router.get("/payroll/edit/:id", authMiddleware, payrollController.edit);
 router.post("/payroll/edit/:id", authMiddleware, payrollController.update);
 router.get("/payroll/delete/:id", authMiddleware, payrollController.delete);
+
+// Leave
+router.get("/leave", authMiddleware, leaveController.index);
+router.get("/leave/add", authMiddleware, leaveController.add);
+router.post("/leave/add", authMiddleware, leaveController.store);
+router.get("/leave/show/:id", authMiddleware, leaveController.show);
+router.get("/leave/edit/:id", authMiddleware, leaveController.edit);
+router.post("/leave/edit/:id", authMiddleware, leaveController.update);
+router.get("/leave/delete/:id", authMiddleware, leaveController.delete);
 
 module.exports = router;

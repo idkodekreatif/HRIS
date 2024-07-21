@@ -1,0 +1,156 @@
+<body class="g-sidenav-show bg-gray-100">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header pb-0">
+          <div class="d-lg-flex">
+            <div>
+              <h5 class="mb-0">All Leave</h5>
+              <p class="text-sm mb-0">
+                A lightweight, extendable, dependency-free javascript HTML table plugin.
+              </p>
+            </div>
+            <div class="ms-auto my-auto mt-lg-0 mt-4">
+              <div class="ms-auto my-auto">
+                <a href="/leave/add" class="btn bg-gradient-info btn-sm mb-0">+&nbsp; New Leave</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body px-0 pb-0">
+          <div class="table-responsive">
+            <table class="table table-flush" id="products-list">
+              <thead class="thead-light">
+                <tr>
+                  <th>Employee</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Type</th>
+                  <th>Long Leave</th>
+                  <th>Description</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% leaves.forEach(leave => { %>
+                <tr>
+                  <td class="text-sm"><%= leave.employee.name %></td>
+                  <td class="text-sm"><%= leave.startDate.toISOString().split('T')[0] %></td>
+                  <td class="text-sm"><%= leave.endDate.toISOString().split('T')[0] %></td>
+                  <td class="text-sm">
+                    <% if ( leave.type == "sick leave") { %>
+                    <span class="badge badge-dot me-4">
+                      <i class="bg-warning"></i>
+                      <span class="text-dark text-xs">Sick Leave</span>
+                    </span>
+                    <% } else if(leave.type == "annual leave"){ %>
+                    <span class="badge badge-dot me-4">
+                      <i class="bg-secondary"></i>
+                      <span class="text-dark text-xs">Annual Leave</span>
+                    </span>
+                    <% } else if(leave.type == "maternity leave") {%>
+                    <span class="badge badge-dot me-4">
+                      <i class="bg-primary"></i>
+                      <span class="text-dark text-xs">Maternity Leave</span>
+                    </span>
+                    <% }else if(leave.type == "big holiday"){ %>
+                    <span class="badge badge-dot me-4">
+                      <i class="bg-dark"></i>
+                      <span class="text-dark text-xs">Big Holiday</span>
+                    </span>
+                    <% } %>
+                  </td>
+                  <td class="text-sm"><%= leave.longLeave %></td>
+                  <td class="text-sm"><%- leave.description %></td>
+                  <td class="text-sm">
+                    <% if ( leave.status == "pending") { %>
+                    <div class="d-flex align-items-center">
+                      <button class="btn btn-icon-only btn-rounded btn-outline-warning mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="far fa-clock" aria-hidden="true"></i></button>
+                      <span>Pending</span>
+                    </div>
+                    <% } else if(leave.status == "approved"){ %>
+                    <div class="d-flex align-items-center">
+                      <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-check" aria-hidden="true"></i></button>
+                      <span>Approved</span>
+                    </div>
+                    <% } else if(leave.status == "rejected") {%>
+                    <div class="d-flex align-items-center">
+                      <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-times" aria-hidden="true"></i></button>
+                      <span>Rejected</span>
+                    </div>
+                    <% } %>
+                  </td>
+
+                  <td class="text-sm">
+                    <a href="/leave/show/<%= leave._id %>" data-bs-toggle="tooltip" data-bs-original-title="Preview leave">
+                      <i class="fas fa-eye text-secondary"></i>
+                    </a>
+                    <a href="/leave/edit/<%= leave._id %>" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit leave">
+                      <i class="fas fa-user-edit text-secondary"></i>
+                    </a>
+                    <a href="/leave/delete/<%= leave._id %>" data-bs-toggle="tooltip" data-bs-original-title="Delete leave">
+                      <i class="fas fa-trash text-secondary"></i>
+                    </a>
+                  </td>
+                </tr>
+                <% }) %>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Employee</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Type</th>
+                  <th>Long Leave</th>
+                  <th>Description</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+  <script src="/public/assets/js/plugins/datatables.js"></script>
+  <script>
+    if (document.getElementById('products-list')) {
+      const dataTableSearch = new simpleDatatables.DataTable("#products-list", {
+        searchable: true,
+        fixedHeight: false,
+        perPage: 7
+      });
+
+      document.querySelectorAll(".export").forEach(function(el) {
+        el.addEventListener("click", function(e) {
+          var type = el.dataset.type;
+          var data = {
+            type: type,
+            filename: "payroll-" + type,
+          };
+
+          if (type === "csv") {
+            data.columnDelimiter = "|";
+          }
+
+          dataTableSearch.export(data);
+        });
+      });
+    }
+
+    function formatCurrency(value) {
+      return numeral(value).format('IDR0,0.00');
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll('.currency').forEach(function(element) {
+        const numericValue = Number(element.textContent);
+        element.textContent = formatCurrency(numericValue);
+      });
+    });
+  </script>
+</body>
