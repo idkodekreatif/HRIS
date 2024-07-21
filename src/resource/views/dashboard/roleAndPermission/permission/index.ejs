@@ -7,14 +7,14 @@
         <div class="card-header pb-0">
           <div class="d-lg-flex">
             <div>
-              <h5 class="mb-0">All Roles</h5>
+              <h5 class="mb-0">All Departements</h5>
               <p class="text-sm mb-0">
                 A lightweight, extendable, dependency-free javascript HTML table plugin.
               </p>
             </div>
             <div class="ms-auto my-auto mt-lg-0 mt-4">
               <div class="ms-auto my-auto">
-                <a href="/role/add" class="btn bg-gradient-info btn-sm mb-0">+&nbsp; New Roles</a>
+                <a href="/permission/add" class="btn bg-gradient-info btn-sm mb-0">+&nbsp; New Permission</a>
               </div>
             </div>
           </div>
@@ -30,19 +30,19 @@
                 </tr>
               </thead>
               <tbody>
-                <% roles.forEach(role => { %>
+                <% permissions.forEach(permission => { %>
                 <tr>
-                  <td class="text-sm"><%= role.name %></td>
-                  <td class="text-sm"><%= role.guardName %></td>
+                  <td class="text-sm"><%= permission.name %></td>
+                  <td class="text-sm"><%= permission.guardName %></td>
 
                   <td class="text-sm">
                     <!-- <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
                       <i class="fas fa-eye text-secondary"></i>
                     </a> -->
-                    <a href="/role/edit/<%= role._id %>" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
+                    <a href="/permission/edit/<%= permission._id %>" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
                       <i class="fas fa-user-edit text-secondary"></i>
                     </a>
-                    <a href="/role/delete/<%= role._id %>" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
+                    <a href="/permission/delete/<%= permission._id %>" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
                       <i class="fas fa-trash text-secondary"></i>
                     </a>
                   </td>

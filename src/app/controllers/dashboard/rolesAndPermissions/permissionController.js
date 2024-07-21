@@ -31,7 +31,7 @@ exports.store = async (req, res) => {
     const permission = new Permission({ name, guardName });
     await permission.save();
 
-    res.redirect("/permissions");
+    res.redirect("/permission");
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -70,7 +70,7 @@ exports.update = async (req, res) => {
 
     await permission.save();
 
-    res.redirect("/permissions");
+    res.redirect("/permission");
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -80,7 +80,7 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   try {
     await Permission.findByIdAndDelete(req.params.id);
-    res.redirect("/permissions");
+    res.redirect("/permission");
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
