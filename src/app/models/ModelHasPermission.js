@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const AutoIncrement = require("mongoose-sequence")(mongoose);
 const Schema = mongoose.Schema;
 
 const ModelHasPermissionSchema = new Schema({
@@ -12,10 +13,11 @@ const ModelHasPermissionSchema = new Schema({
     required: true,
   },
   modelId: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    refPath: "modelType",
+    // Ensure this is consistent
+    type: Number, // This field should match with AutoIncrement configuration
   },
 });
+
+ModelHasPermissionSchema.plugin(AutoIncrement, { inc_field: "modelId" }); // Ensure this matches the schema field
 
 module.exports = mongoose.model("ModelHasPermission", ModelHasPermissionSchema);

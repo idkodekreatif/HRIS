@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const AutoIncrement = require("mongoose-sequence")(mongoose);
+// const AutoIncrement = require("mongoose-sequence")(mongoose);
 const Schema = mongoose.Schema;
 
 const ModelHasRoleSchema = new Schema({
@@ -17,6 +17,6 @@ const ModelHasRoleSchema = new Schema({
   },
 });
 
-ModelHasRoleSchema.plugin(AutoIncrement, { inc_field: "modelId" });
+// ModelHasRoleSchema.plugin(AutoIncrement, { inc_field: "modelId" });
 
 module.exports = mongoose.model("ModelHasRole", ModelHasRoleSchema);

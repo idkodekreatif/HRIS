@@ -1,4 +1,5 @@
 const Permission = require("../../../models/Permission");
+const ModelHasPermission = require("../../../models/ModelHasPermission");
 
 exports.index = async (req, res) => {
   try {
@@ -77,10 +78,31 @@ exports.update = async (req, res) => {
   }
 };
 
+// exports.delete = async (req, res) => {
+//   try {
+//     await Permission.findByIdAndDelete(req.params.id);
+//     res.redirect("/permission");
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// };
+
 exports.delete = async (req, res) => {
   try {
+    const permission = await Permission.findById(req.params.id);
+
+    if (!permission) {
+      return res.status(404).send("Permission not found");
+    }
+
+    // Delete related entries in ModelHasPermission
+    await ModelHasPermission.deleteMany({ permissionId: permission._id });
+
+    // Delete the permission
     await Permission.findByIdAndDelete(req.params.id);
-    res.redirect("/permission");
+
+    res.redirect("/permission"); // Change this to your desired route
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
