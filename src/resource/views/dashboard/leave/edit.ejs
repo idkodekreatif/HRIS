@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-lg-9 col-12 mx-auto">
+    <div class="card card-body mt-4">
+      <form action="/leave/edit/<%= leave._id %>" method="POST">
+        <h6 class="mb-0">New Leave</h6>
+        <p class="text-sm mb-0">Create new Leave</p>
+        <hr class="horizontal dark my-3">
+        <label for="projectName" class="form-label">Name</label>
+        <select class="form-select choices-multiple-remove-button" id="employee" name="employee" required>
+          <% employees.forEach(employee => { %>
+          <option value="<%= employee._id %>" <%= leave.employee.toString() === employee._id.toString() ? 'selected' : '' %>><%= employee.name %></option>
+          <% }) %>
+        </select>
+
+        <div class="row my-3">
+          <div class="col-6">
+            <label class="form-label">Start Date</label>
+            <input type="date" class="form-control datetimepicker" name="startDate" value="<%= leave.startDate.toISOString().split('T')[0] %>" placeholder="yyyy-dd-mm" required>
+          </div>
+          <div class="col-6">
+            <label class="form-label">End Date</label>
+            <input type="date" class="form-control datetimepicker" name="endDate" value="<%= leave.endDate.toISOString().split('T')[0] %>" placeholder="yyyy-dd-mm" required>
+          </div>
+        </div>
+
+        <div class="row my-3">
+          <div class="col-6">
+            <label class="form-label">Type</label>
+            <select class="form-select choices-multiple-remove-button" id="type" name="type" required>
+              <option value="sick leave" <%= leave.type === 'sick leave' ? 'selected' : '' %>>Sick Leave</option>
+              <option value="annual leave" <%= leave.type === 'annual leave' ? 'selected' : '' %>>Annual Leave</option>
+              <option value="maternity leave" <%= leave.type === 'maternity leave' ? 'selected' : '' %>>Maternity Leave</option>
+              <option value="big holiday" <%= leave.type === 'big holiday' ? 'selected' : '' %>>Big Holiday</option>
+            </select>
+          </div>
+          <div class="col-6">
+            <label class="form-label">Long Leave (days)</label>
+            <input type="number" class="form-control" id="longLeave" name="longLeave" value="<%= leave.longLeave %>" placeholder="Days" required>
+          </div>
+        </div>
+
+        <label class="form-label">Description</label>
+        <textarea class="form-control" id="description" name="description" required><%= leave.description %></textarea>
+
+        <label class="form-label">Status</label>
+        <select class="form-select choices-multiple-remove-button" id="status" name="status" required>
+          <option value="pending" <%= leave.status === 'pending' ? 'selected' : '' %>>Pending</option>
+          <option value="approved" <%= leave.status === 'approved' ? 'selected' : '' %>>Approved</option>
+          <option value="rejected" <%= leave.status === 'rejected' ? 'selected' : '' %>>Rejected</option>
+        </select>
+
+        <div class="d-flex justify-content-end mt-4">
+          <button type="button" name="button" class="btn btn-light m-0">Cancel</button>
+          <button type="submit" name="button" class="btn bg-gradient-info m-0 ms-2">Update Leave</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script src="/public/assets/js/plugins/choices.min.js"></script>
+<script src="/public/assets/js/plugins/quill.min.js"></script>
+<script src="/public/assets/js/plugins/flatpickr.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    if (document.querySelector('.datetimepicker')) {
+      flatpickr('.datetimepicker', {
+        allowInput: true
+      });
+    }
+
+    const choiceElements = document.querySelectorAll('.choices-multiple-remove-button');
+    choiceElements.forEach(element => {
+      new Choices(element, {
+        removeItemButton: true
+      });
+    });
+  });
+
+  CKEDITOR.replace('description');
+</script>
