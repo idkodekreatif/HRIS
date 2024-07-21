@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const AutoIncrement = require("mongoose-sequence")(mongoose);
 const Schema = mongoose.Schema;
 
 const ModelHasRoleSchema = new Schema({
@@ -12,10 +13,10 @@ const ModelHasRoleSchema = new Schema({
     required: true,
   },
   modelId: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    refPath: "modelType",
+    type: Number,
   },
 });
+
+ModelHasRoleSchema.plugin(AutoIncrement, { inc_field: "modelId" });
 
 module.exports = mongoose.model("ModelHasRole", ModelHasRoleSchema);

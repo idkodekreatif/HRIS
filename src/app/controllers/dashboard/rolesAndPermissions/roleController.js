@@ -1,4 +1,5 @@
 const Role = require("../../../models/Role");
+const ModelHasRole = require("../../../models/ModelHasRole");
 
 exports.index = async (req, res) => {
   try {
@@ -75,10 +76,31 @@ exports.update = async (req, res) => {
   }
 };
 
+// exports.delete = async (req, res) => {
+//   try {
+//     await Role.findByIdAndDelete(req.params.id);
+//     res.redirect("/role");
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// };
+
 exports.delete = async (req, res) => {
   try {
+    const role = await Role.findById(req.params.id);
+
+    if (!role) {
+      return res.status(404).send("Role not found");
+    }
+
+    // Menghapus entri ModelHasRole terkait
+    await ModelHasRole.deleteMany({ roleId: role._id });
+
+    // Menghapus role
     await Role.findByIdAndDelete(req.params.id);
-    res.redirect("/role");
+
+    res.redirect("/role"); // Ganti dengan route yang sesuai
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

@@ -10,7 +10,6 @@ const payrollController = require("../controllers/dashboard/payroll/payrollContr
 const leaveController = require("../controllers/dashboard/leave/leaveController");
 const roleController = require("../controllers/dashboard/rolesAndPermissions/roleController");
 const permissionController = require("../controllers/dashboard/rolesAndPermissions/permissionController");
-const modelHasRoleController = require("../controllers/dashboard/rolesAndPermissions/modelHasRoleController");
 const modelHasPermissionController = require("../controllers/dashboard/rolesAndPermissions/modelHasPermissionController");
 const roleHasPermissionController = require("../controllers/dashboard/rolesAndPermissions/roleHasPermissionController");
 
@@ -116,22 +115,6 @@ router
 router
   .route("/permission/delete/:id")
   .get(authMiddleware, permissionController.delete);
-
-// model Has Role routes
-router
-  .route("/model-has-role")
-  .get(authMiddleware, modelHasRoleController.index);
-router
-  .route("/model-has-role/add")
-  .get(authMiddleware, modelHasRoleController.create)
-  .post(authMiddleware, modelHasRoleController.store);
-router
-  .route("/model-has-role/edit/:id")
-  .get(authMiddleware, modelHasRoleController.edit)
-  .post(authMiddleware, modelHasRoleController.update);
-router
-  .route("/model-has-role/delete/:id")
-  .get(authMiddleware, modelHasRoleController.delete);
 
 // model Has Permission routes
 router

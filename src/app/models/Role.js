@@ -15,4 +15,30 @@ const RoleSchema = new Schema(
   { timestamps: true }
 );
 
+RoleSchema.post("save", async function (doc, next) {
+  const ModelHasRole = mongoose.model("ModelHasRole");
+
+  try {
+    const modelHasRole = new ModelHasRole({
+      roleId: doc._id,
+      modelType: "App\\Models\\User", // Sesuaikan path model yang benar
+    });
+    // Use await to wait for the save operation
+    await modelHasRole.save();
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Hook untuk menghapus entri ModelHasRole ketika Role dihapus
+RoleSchema.pre("remove", async function (next) {
+  try {
+    await mongoose.model("ModelHasRole").deleteMany({ roleId: this._id });
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = mongoose.model("Role", RoleSchema);
