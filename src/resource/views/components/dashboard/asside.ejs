@@ -33,7 +33,7 @@
         <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">PAGES</h6>
       </li>
       <li class="nav-item">
-        <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link <%= currentRoute.match(/^\/(employee|departments|attendance|payroll)/) ? 'active' : '' %>" aria-controls="pagesExamples" role="button" aria-expanded="false">
+        <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link <%= currentRoute.match(/^\/(employee|departments|attendance|payroll|leave)/) ? 'active' : '' %>" aria-controls="pagesExamples" role="button" aria-expanded="false">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center me-2">
             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>office</title>
@@ -51,7 +51,7 @@
           </div>
           <span class="nav-link-text ms-1">Pages</span>
         </a>
-        <div class="collapse <%= currentRoute.match(/^\/(employee|departments|attendance|payroll)/) ? 'show' : '' %>" id="pagesExamples">
+        <div class="collapse <%= currentRoute.match(/^\/(employee|departments|attendance|payroll|leave)/) ? 'show' : '' %>" id="pagesExamples">
           <ul class="nav ms-4 ps-3">
             <li class="nav-item">
               <a class="nav-link <%= currentRoute.startsWith('/employee') ? 'active' : '' %>" href="/employee">
@@ -75,6 +75,12 @@
               <a class="nav-link <%= currentRoute.startsWith('/payroll') ? 'active' : '' %>" href="/payroll">
                 <span class="sidenav-mini-icon"> P </span>
                 <span class="sidenav-normal"> Payroll </span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <%= currentRoute.startsWith('/leave') ? 'active' : '' %>" href="/leave">
+                <span class="sidenav-mini-icon"> L </span>
+                <span class="sidenav-normal"> Leave </span>
               </a>
             </li>
           </ul>
