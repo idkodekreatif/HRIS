@@ -24,6 +24,7 @@
             <table class="table table-flush" id="products-list">
               <thead class="thead-light">
                 <tr>
+                  <th>#</th>
                   <th>Employee</th>
                   <th>Date</th>
                   <th>Status</th>
@@ -32,8 +33,9 @@
                 </tr>
               </thead>
               <tbody>
-                <% attendances.forEach(attendance => { %>
+                <% attendances.forEach((attendance, index) => { %>
                 <tr>
+                  <td class="text-sm"><%= index + 1 %></td>
                   <td class="text-sm"><%= attendance.employee.name %></td>
                   <td class="text-sm"><%= new Date(attendance.date).toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' }) %></td>
                   <td class="text-sm">
@@ -77,6 +79,7 @@
               </tbody>
               <tfoot>
                 <tr>
+                  <th>#</th>
                   <th>Employee</th>
                   <th>Date</th>
                   <th>Status</th>

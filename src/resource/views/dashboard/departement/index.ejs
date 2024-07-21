@@ -51,14 +51,16 @@
             <table class="table table-flush" id="products-list">
               <thead class="thead-light">
                 <tr>
+                  <th>#</th>
                   <th>Name</th>
                   <th>Manager</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <% departments.forEach(department => { %>
+                <% departments.forEach((department, index) => { %>
                 <tr>
+                  <td class="text-sm"><%= index + 1 %></td>
                   <td class="text-sm"><%= department.name %></td>
                   <td class="text-sm"><%= department.manager.name %></td>
 
@@ -78,6 +80,7 @@
               </tbody>
               <tfoot>
                 <tr>
+                  <th>#</th>
                   <th>Name</th>
                   <th>Manager</th>
                   <th>Action</th>

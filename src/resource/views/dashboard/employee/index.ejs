@@ -51,6 +51,7 @@
             <table class="table table-flush" id="products-list">
               <thead class="thead-light">
                 <tr>
+                  <th>#</th>
                   <th>Name</th>
                   <th>Email</th>
                   <th>Phone</th>
@@ -62,8 +63,9 @@
                 </tr>
               </thead>
               <tbody>
-                <% employees.forEach(employee => { %>
+                <% employees.forEach((employee, index) => { %>
                 <tr>
+                  <td class="text-sm"><%= index + 1 %></td>
                   <td class="text-sm"><%= employee.name %></td>
                   <td class="text-sm"><%= employee.email %></td>
                   <td class="text-sm"><%= employee.phone %></td>
@@ -88,6 +90,7 @@
               </tbody>
               <tfoot>
                 <tr>
+                  <th>#</th>
                   <th>Name</th>
                   <th>Email</th>
                   <th>Phone</th>

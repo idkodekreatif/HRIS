@@ -24,14 +24,16 @@
             <table class="table table-flush" id="products-list">
               <thead class="thead-light">
                 <tr>
+                  <th>#</th>
                   <th>Name</th>
                   <th>Guard Name</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <% roles.forEach(role => { %>
+                <% roles.forEach((role, index) => { %>
                 <tr>
+                  <td class="text-sm"><%= index + 1 %></td>
                   <td class="text-sm"><%= role.name %></td>
                   <td class="text-sm"><%= role.guardName %></td>
 
@@ -51,6 +53,7 @@
               </tbody>
               <tfoot>
                 <tr>
+                  <th>#</th>
                   <th>Name</th>
                   <th>Guard Name</th>
                   <th>Action</th>
