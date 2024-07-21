@@ -21,18 +21,16 @@ PermissionSchema.post("save", async function (doc, next) {
   try {
     const modelHasPermission = new ModelHasPermission({
       permissionId: doc._id,
-      modelType: "App\\Models\\User", // Adjust this path as needed
+      modelType: "App\\Models\\User", // Sesuaikan path model yang benar
     });
-
-    // Save the new ModelHasPermission instance
     await modelHasPermission.save();
     next();
   } catch (err) {
-    console.error("Error saving ModelHasPermission:", err);
     next(err);
   }
 });
 
+// Hook untuk menghapus entri ModelHasPermission ketika Permission dihapus
 PermissionSchema.pre("remove", async function (next) {
   try {
     await mongoose
@@ -40,7 +38,6 @@ PermissionSchema.pre("remove", async function (next) {
       .deleteMany({ permissionId: this._id });
     next();
   } catch (error) {
-    console.error("Error removing ModelHasPermission:", error);
     next(error);
   }
 });

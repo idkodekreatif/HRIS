@@ -23,7 +23,6 @@ RoleSchema.post("save", async function (doc, next) {
       roleId: doc._id,
       modelType: "App\\Models\\User", // Sesuaikan path model yang benar
     });
-    // Use await to wait for the save operation
     await modelHasRole.save();
     next();
   } catch (err) {

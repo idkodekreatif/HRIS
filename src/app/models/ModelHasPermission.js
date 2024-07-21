@@ -12,12 +12,16 @@ const ModelHasPermissionSchema = new Schema({
     type: String,
     required: true,
   },
-  modelId: {
-    // Ensure this is consistent
-    type: Number, // This field should match with AutoIncrement configuration
+  modelPermissionId: {
+    type: Number,
+    unique: true, // Pastikan field ini unik
   },
 });
 
-ModelHasPermissionSchema.plugin(AutoIncrement, { inc_field: "modelId" }); // Ensure this matches the schema field
+ModelHasPermissionSchema.plugin(AutoIncrement, {
+  inc_field: "modelPermissionId",
+  start_seq: 1,
+  unique: true, // Tambahkan opsi ini untuk memastikan keunikannya
+});
 
 module.exports = mongoose.model("ModelHasPermission", ModelHasPermissionSchema);
