@@ -66,7 +66,7 @@ router.get("/payroll/delete/:id", authMiddleware, payrollController.delete);
 
 // Leave
 router.get("/leave", authMiddleware, leaveController.index);
-router.get("/leave/add", authMiddleware, leaveController.add);
+router.get("/leave/add", authMiddleware, leaveController.create);
 router.post("/leave/add", authMiddleware, leaveController.store);
 router.get("/leave/show/:id", authMiddleware, leaveController.show);
 router.get("/leave/edit/:id", authMiddleware, leaveController.edit);

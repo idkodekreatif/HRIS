@@ -66,10 +66,12 @@ exports.update = async (req, res) => {
     if (!attendance) {
       return res.status(404).send("Attendance not found");
     }
+
     attendance.employee = employee;
     attendance.date = date;
     attendance.status = status;
     attendance.description = description;
+
     await attendance.save();
     res.redirect("/attendance");
   } catch (err) {
@@ -79,10 +81,8 @@ exports.update = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
-  const { id } = req.params;
-
   try {
-    await Attendance.findByIdAndDelete(id);
+    await Attendance.findByIdAndDelete(req.params.id);
     res.redirect("/attendance");
   } catch (err) {
     console.error(err.message);

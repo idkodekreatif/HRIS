@@ -127,10 +127,8 @@ exports.update = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
-  const { id } = req.params;
-
   try {
-    await Payroll.findByIdAndDelete(id);
+    await Payroll.findByIdAndDelete(req.params.id);
     res.redirect("/payroll");
   } catch (err) {
     console.error(err.message);

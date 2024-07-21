@@ -13,7 +13,7 @@ exports.index = async (req, res) => {
   }
 };
 
-exports.add = async (req, res) => {
+exports.create = async (req, res) => {
   try {
     const employees = await Employee.find();
     res.render("dashboard/leave/create", { employees, title: "Create Leave" });

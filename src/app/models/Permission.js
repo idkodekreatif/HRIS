@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const RoleSchema = new Schema(
+const PermissionSchema = new Schema(
   {
     name: {
       type: String,
@@ -15,4 +15,4 @@ const RoleSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Role", RoleSchema);
+module.exports = mongoose.model("Permission", PermissionSchema);
