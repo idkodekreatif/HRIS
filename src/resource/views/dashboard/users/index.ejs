@@ -7,14 +7,14 @@
         <div class="card-header pb-0">
           <div class="d-lg-flex">
             <div>
-              <h5 class="mb-0">All Role and Permission</h5>
+              <h5 class="mb-0">All Users</h5>
               <p class="text-sm mb-0">
                 A lightweight, extendable, dependency-free javascript HTML table plugin.
               </p>
             </div>
             <div class="ms-auto my-auto mt-lg-0 mt-4">
               <div class="ms-auto my-auto">
-                <a href="/rhp/add" class="btn bg-gradient-info btn-sm mb-0">+&nbsp; New Role and Permission</a>
+                <a href="/users/add" class="btn bg-gradient-info btn-sm mb-0">+&nbsp; New Users</a>
               </div>
             </div>
           </div>
@@ -25,28 +25,28 @@
               <thead class="thead-light">
                 <tr>
                   <th>#</th>
+                  <th>Username</th>
                   <th>Role</th>
-                  <th>Permission</th>
-                  <th>Permission Guard</th>
+                  <th>Employee</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <% roleHasPermissions.forEach((rhp, index) => { %>
+                <% users.forEach((user, index) => { %>
                 <tr>
                   <td class="text-sm"><%= index + 1 %></td>
-                  <td class="text-sm"><%= rhp.roleId.name %></td>
-                  <td class="text-sm"><%= rhp.permissionId.name %></td>
-                  <td class="text-sm"><%= rhp.permissionId.guardName %></td>
+                  <td class="text-sm"><%= user.username %></td>
+                  <td class="text-sm"><%= user.role.name %></td>
+                  <td class="text-sm"><%= user.employee.name %></td>
 
                   <td class="text-sm">
                     <!-- <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
                       <i class="fas fa-eye text-secondary"></i>
                     </a> -->
-                    <a href="/rhp/edit/<%= rhp._id %>" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
+                    <a href="/users/edit/<%= user._id %>" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit product">
                       <i class="fas fa-user-edit text-secondary"></i>
                     </a>
-                    <a href="/rhp/delete/<%= rhp._id %>" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
+                    <a href="/users/delete/<%= user._id %>" data-bs-toggle="tooltip" data-bs-original-title="Delete product">
                       <i class="fas fa-trash text-secondary"></i>
                     </a>
                   </td>
@@ -56,9 +56,9 @@
               <tfoot>
                 <tr>
                   <th>#</th>
+                  <th>Username</th>
                   <th>Role</th>
-                  <th>Permission</th>
-                  <th>Permission Guard</th>
+                  <th>Employee</th>
                   <th>Action</th>
                 </tr>
               </tfoot>

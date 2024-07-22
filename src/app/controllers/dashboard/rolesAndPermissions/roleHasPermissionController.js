@@ -39,7 +39,7 @@ exports.store = async (req, res) => {
     const roleHasPermission = new RoleHasPermission({ roleId, permissionId });
 
     await roleHasPermission.save();
-    res.redirect("/role-has-permission");
+    res.redirect("/rhp");
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -81,7 +81,7 @@ exports.update = async (req, res) => {
     roleHasPermission.permissionId = permissionId;
 
     await roleHasPermission.save();
-    res.redirect("/role-has-permission");
+    res.redirect("/rhp");
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -91,7 +91,7 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   try {
     await RoleHasPermission.findByIdAndDelete(req.params.id);
-    res.redirect("/role-has-permission");
+    res.redirect("/rhp");
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

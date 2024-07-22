@@ -11,6 +11,7 @@ const leaveController = require("../controllers/dashboard/leave/leaveController"
 const roleController = require("../controllers/dashboard/rolesAndPermissions/roleController");
 const permissionController = require("../controllers/dashboard/rolesAndPermissions/permissionController");
 const roleHasPermissionController = require("../controllers/dashboard/rolesAndPermissions/roleHasPermissionController");
+const userController = require("../controllers/dashboard/user/userController");
 
 router.get("/", auth.index);
 router.post("/login", auth.login);
@@ -116,19 +117,29 @@ router
   .get(authMiddleware, permissionController.delete);
 
 // role Has Permission routes
+router.route("/rhp").get(authMiddleware, roleHasPermissionController.index);
 router
-  .route("/role-has-permission")
-  .get(authMiddleware, roleHasPermissionController.index);
-router
-  .route("/role-has-permission/add")
+  .route("/rhp/add")
   .get(authMiddleware, roleHasPermissionController.create)
   .post(authMiddleware, roleHasPermissionController.store);
 router
-  .route("/role-has-permission/edit/:id")
+  .route("/rhp/edit/:id")
   .get(authMiddleware, roleHasPermissionController.edit)
   .post(authMiddleware, roleHasPermissionController.update);
 router
-  .route("/role-has-permission/delete/:id")
+  .route("/rhp/delete/:id")
   .get(authMiddleware, roleHasPermissionController.delete);
+
+// role Has Permission routes
+router.route("/users").get(authMiddleware, userController.index);
+router
+  .route("/users/add")
+  .get(authMiddleware, userController.create)
+  .post(authMiddleware, userController.store);
+router
+  .route("/users/edit/:id")
+  .get(authMiddleware, userController.edit)
+  .post(authMiddleware, userController.update);
+router.route("/users/delete/:id").get(authMiddleware, userController.delete);
 
 module.exports = router;
