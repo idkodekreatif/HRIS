@@ -88,7 +88,7 @@
       </li>
 
       <li class="nav-item">
-        <a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link <%= currentRoute.match(/^\/(permission|role|rhp)/) ? 'active' : '' %>" aria-controls="applicationsExamples" role="button" aria-expanded="false">
+        <a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link <%= currentRoute.match(/^\/(permission|role|rhp|users)/) ? 'active' : '' %>" aria-controls="applicationsExamples" role="button" aria-expanded="false">
           <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
             <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title>settings</title>
@@ -107,7 +107,7 @@
           </div>
           <span class="nav-link-text ms-1">Settings</span>
         </a>
-        <div class="collapse <%= currentRoute.match(/^\/(permission|role|rhp)/) ? 'show' : '' %>" id="applicationsExamples">
+        <div class="collapse <%= currentRoute.match(/^\/(permission|role|rhp|users)/) ? 'show' : '' %>" id="applicationsExamples">
           <ul class="nav ms-4 ps-3">
             <li class="nav-item ">
               <a class="nav-link <%= currentRoute.startsWith('/role') ? 'active' : '' %>" href="/role">
@@ -125,6 +125,12 @@
               <a class="nav-link <%= currentRoute.startsWith('/rhp') ? 'active' : '' %>" href="/rhp">
                 <span class="sidenav-mini-icon"> A </span>
                 <span class="sidenav-normal"> Role and Permissions </span>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link <%= currentRoute.startsWith('/users') ? 'active' : '' %>" href="/users">
+                <span class="sidenav-mini-icon"> U </span>
+                <span class="sidenav-normal"> Users </span>
               </a>
             </li>
           </ul>
