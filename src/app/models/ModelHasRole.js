@@ -14,14 +14,14 @@ const ModelHasRoleSchema = new Schema({
   },
   modelRoleId: {
     type: Number,
-    unique: true, // Pastikan field ini unik
+    unique: true, // Ensure uniqueness
   },
 });
 
+// Plugin for auto-increment on modelRoleId
 ModelHasRoleSchema.plugin(AutoIncrement, {
   inc_field: "modelRoleId",
-  start_seq: 1,
-  unique: true, // Pastikan field ini unik
+  start_seq: 1, // Ensure this is set properly based on existing data
 });
 
 module.exports = mongoose.model("ModelHasRole", ModelHasRoleSchema);

@@ -37,7 +37,7 @@
                   <td class="text-sm"><%= index + 1 %></td>
                   <td class="text-sm"><%= user.username %></td>
                   <td class="text-sm"><%= user.role.name %></td>
-                  <td class="text-sm"><%= user.employee.name %></td>
+                  <td class="text-sm"><%= user.employee ? user.employee.name : 'No Employee Assigned' %></td>
 
                   <td class="text-sm">
                     <!-- <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Preview product">

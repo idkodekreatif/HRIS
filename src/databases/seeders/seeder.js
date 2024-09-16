@@ -6,14 +6,24 @@ const Role = require("../../app/models/Role");
 const Employee = require("../../app/models/Employee");
 const Department = require("../../app/models/Department");
 const connectToDatabase = require("../../configs/connectToDatabase");
+const ModelHasRole = require("../../app/models/ModelHasRole");
 
 async function seed() {
   await connectToDatabase();
 
   try {
     // Step 1: Insert Roles
-    const roleAdmin = new Role({ name: "admin", permission: "all" });
-    const roleUser = new Role({ name: "user", permission: "read" });
+    const roleAdmin = new Role({
+      name: "admin",
+      permission: "all",
+      guardName: "web",
+    });
+    const roleUser = new Role({
+      name: "user",
+      permission: "read",
+      guardName: "web",
+    });
+
     await roleAdmin.save();
     await roleUser.save();
     console.log("Roles inserted successfully");
@@ -68,7 +78,7 @@ async function seed() {
     const savedEmployees = await Employee.insertMany(employees);
     console.log("Employees inserted successfully");
 
-    // Step 4: Insert Departments
+    // Step 4: Insert Departments and update employees with department ids
     const departments = [
       {
         name: "IT",
@@ -80,8 +90,34 @@ async function seed() {
       },
     ];
 
-    await Department.insertMany(departments);
+    const savedDepartments = await Department.insertMany(departments);
     console.log("Departments inserted successfully");
+
+    // Update employees with department ObjectIds
+    await Employee.updateOne(
+      { name: "John Doe" },
+      { department: savedDepartments.find((dept) => dept.name === "IT")._id }
+    );
+    await Employee.updateOne(
+      { name: "Jane Smith" },
+      { department: savedDepartments.find((dept) => dept.name === "HR")._id }
+    );
+    console.log("Employees updated with department IDs");
+
+    // Step 5: Insert ModelHasRole (Assigning roles to users)
+    const modelHasRoles = [
+      {
+        roleId: roleAdmin._id, // Role admin
+        modelType: "User", // Model type
+      },
+      {
+        roleId: roleUser._id, // Role user
+        modelType: "User", // Model type
+      },
+    ];
+
+    await ModelHasRole.insertMany(modelHasRoles);
+    console.log("ModelHasRole entries inserted successfully");
 
     console.log("Database seeding completed!");
   } catch (err) {

@@ -49,9 +49,13 @@ exports.store = async (req, res) => {
 
 exports.edit = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    // Populate employee and role data
+    const user = await User.findById(req.params.id)
+      .populate("employee")
+      .populate("role");
     const roles = await Role.find();
     const employees = await Employee.find();
+
     res.render("dashboard/users/edit", {
       user,
       roles,

@@ -16,7 +16,9 @@
             <label class="form-label">Employee</label>
             <select id="employee" class="form-control choices-multiple-remove-button" name="employee" required>
               <% employees.forEach(employee => { %>
-              <option value="<%= employee._id %>" <%= user.employee._id.equals(employee._id) ? 'selected' : '' %>><%= employee.name %></option>
+              <option value="<%= employee._id %>" <%= user.employee && user.employee._id && user.employee._id.equals(employee._id) ? 'selected' : '' %>>
+                <%= employee.name %>
+              </option>
               <% }) %>
             </select>
           </div>
